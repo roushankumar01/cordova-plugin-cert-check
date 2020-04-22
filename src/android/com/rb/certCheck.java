@@ -12,7 +12,11 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Application;
 import android.util.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -30,23 +34,34 @@ public class certCheck extends CordovaPlugin {
   private String fingerprint = "cdvRootBeer";
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+      Context context = getContext.getAppContext();
+      PackageInfo packageInfo = null;
+      try {
+          packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+          //note sample just checks the first signature
+          for (Signature signature : packageInfo.signatures) {
+              // SHA1 the signature
+              String sha1 = getSHA1(signature.toByteArray());
+              // check is matches hardcoded value
+              callbackContext.success(APP_SIGNATURE.equals(sha1));
+          }
+      } catch (NameNotFoundException e) {
+          e.printStackTrace();
+          return false;
+      }
 
-    PackageInfo packageInfo = context.getPackageManager().getPackageInfo(
-				getPackageName(), PackageManager.GET_SIGNATURES);
-    //note sample just checks the first signature
-		for (Signature signature : packageInfo.signatures) {
-			// SHA1 the signature
-			String sha1 = getSHA1(signature.toByteArray());
-			// check is matches hardcoded value
-      callbackContext.success(APP_SIGNATURE.equals(sha1));
-		}
     return true;
   }
 
   //computed the sha1 hash of the signature
   public static String getSHA1(byte[] sig) {
-    MessageDigest digest = MessageDigest.getInstance("SHA1");
-    digest.update(sig);
+      MessageDigest digest = null;
+      try {
+          digest = MessageDigest.getInstance("SHA1");
+      } catch (NoSuchAlgorithmException e) {
+          e.printStackTrace();
+      }
+      digest.update(sig);
     byte[] hashtext = digest.digest();
     return bytesToHex(hashtext);
 }
@@ -65,4 +80,21 @@ public static String bytesToHex(byte[] bytes) {
   return new String(hexChars);
 }
 
+}
+
+class getContext extends Application {
+    private static Context appContext;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appContext = getApplicationContext();
+
+        /* If you has other classes that need context object to initialize when application is created,
+         you can use the appContext here to process. */
+    }
+
+    public static Context getAppContext() {
+        return appContext;
+    }
 }
