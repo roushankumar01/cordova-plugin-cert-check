@@ -1,65 +1,18 @@
 {
-  "_from": "cordova-plugin-android-rootbeer@1.0.0",
-  "_id": "cordova-plugin-android-rootbeer@1.0.0",
-  "_inBundle": false,
-  "_integrity": "sha512-vpQxXvtyyFny8lXjzaaQEDqefqS2ZAd4QgHs6nq1cZDZwnAzwTe8p+Hler2vA4OQAIYpU3/Zy2iEHvQkdRf4+w==",
-  "_location": "/cordova-plugin-android-rootbeer",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "cordova-plugin-android-rootbeer@1.0.0",
-    "name": "cordova-plugin-android-rootbeer",
-    "escapedName": "cordova-plugin-android-rootbeer",
-    "rawSpec": "1.0.0",
-    "saveSpec": null,
-    "fetchSpec": "1.0.0"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
+  "name": "cordova-plugin-cert-check",
+  "version": "1.0.0",
+  "description": "A cordova plugin to detect if the device is running in debug mode or not.",
+  "keywords": [
+    "cordova",
+    "debug",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-android-rootbeer/-/cordova-plugin-android-rootbeer-1.0.0.tgz",
-  "_shasum": "1c866def15fd010633f18cb11cf9734e3093ada1",
-  "_spec": "cordova-plugin-android-rootbeer@1.0.0",
-  "_where": "/Users/sunit.bhattacharya/Documents/Projects/SMP/Single_Mobile_Platform",
-  "author": {
-    "name": "Karan Gandhi"
-  },
-  "bugs": {
-    "url": "https://github.com/karandpr/cordova-plugin-android-rootbeer/issues"
-  },
-  "bundleDependencies": false,
   "cordova": {
-    "id": "cordova-plugin-android-rootbeer",
+    "id": "cordova-plugin-cert-check",
     "platforms": [
       "android"
     ]
-  },
-  "deprecated": false,
-  "description": "A wrapper plugin for rootbeer library. This library is used to detect root on Android Devices.",
-  "engines": {
-    "cordovaDependencies": {
-      "0.0.6": {
-        "cordova-android": ">=4.0.0"
-      }
-    }
-  },
-  "homepage": "https://github.com/karandpr/cordova-plugin-android-rootbeer#readme",
-  "keywords": [
-    "cordova",
-    "root",
-    "android",
-    "rootbeer",
-    "rooted",
-    "ecosystem:cordova",
-    "cordova-android"
-  ],
-  "license": "Apache-2.0",
-  "name": "cordova-plugin-android-rootbeer",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/karandpr/cordova-plugin-android-rootbeer.git"
-  },
-  "version": "1.0.0"
+  }
 }
