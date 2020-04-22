@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.Application;
+import android.util.Base64;
 import android.util.Log;
 
 import java.security.MessageDigest;
@@ -24,34 +25,61 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
 
+import static java.security.CryptoPrimitive.SIGNATURE;
+
 public class certCheck extends CordovaPlugin {
   private static final String TAG = "cdvRootBeer";
   private static final String APP_SIGNATURE = "1038C0E34658923C4192E61B16846";
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
-    Log.d(TAG, "Initializing cdvRootBeer");    
+    Log.d(TAG, "Initializing cdvRootBeer");
   }
   private String fingerprint = "cdvRootBeer";
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-      Context context = getContext.getAppContext();
+      Context context = this.cordova.getActivity().getApplicationContext();
+
+      String strResult = "";
       PackageInfo packageInfo = null;
       try {
+          Log.d("key", context.getPackageName());
           packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
           //note sample just checks the first signature
           for (Signature signature : packageInfo.signatures) {
               // SHA1 the signature
               String sha1 = getSHA1(signature.toByteArray());
               // check is matches hardcoded value
-              callbackContext.success(APP_SIGNATURE.equals(sha1));
+              Log.d("key", sha1);
+              callbackContext.success(sha1);
           }
+
       } catch (NameNotFoundException e) {
           e.printStackTrace();
-          return false;
+          callbackContext.error("catch");
       }
 
     return true;
   }
+
+
+    protected static String doFingerprint(byte[] certificateBytes, String algorithm)
+            throws Exception {
+        MessageDigest md = MessageDigest.getInstance(algorithm);
+        md.update(certificateBytes);
+        byte[] digest = md.digest();
+
+        String toRet = "";
+        for (int i = 0; i < digest.length; i++) {
+            if (i != 0)
+                toRet += ":";
+            int b = digest[i] & 0xff;
+            String hex = Integer.toHexString(b);
+            if (hex.length() == 1)
+                toRet += "0";
+            toRet += hex;
+        }
+        return toRet;
+    }
 
   //computed the sha1 hash of the signature
   public static String getSHA1(byte[] sig) {
@@ -87,6 +115,7 @@ class getContext extends Application {
 
     @Override
     public void onCreate() {
+        Log.d("plugin", "App started");
         super.onCreate();
         appContext = getApplicationContext();
 
