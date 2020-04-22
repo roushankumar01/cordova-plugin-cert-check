@@ -21,6 +21,5 @@
       </config-file>
 
       <source-file src="src/android/com/rb/certCheck.java" target-dir="src/com/rb/" />
-       <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
