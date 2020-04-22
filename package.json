@@ -1,0 +1,28 @@
+{
+  "name": "cordova-plugin-cert-check",
+  "version": "1.0.0",
+  "description": "cordova-plugin-cert-check",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roushankumar01/cordova-plugin-cert-check.git"
+  },
+  "keywords": [
+    "cordova",
+    "debug",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Matt Lewis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roushankumar01/cordova-plugin-cert-check/issues"
+  },
+  "homepage": "https://github.com/roushankumar01/cordova-plugin-cert-check#readme",
+  "cordova": {
+    "id": "cordova-plugin-cert-check",
+    "platforms": [
+      "android"
+    ]
+  }
+}
