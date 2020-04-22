@@ -17,7 +17,7 @@ import com.scottyab.rootbeer.RootBeer;
 import com.scottyab.rootbeer.util.Utils;
 import java.util.Date;
 
-public class cdvRootBeer extends CordovaPlugin {
+public class certCheck extends CordovaPlugin {
   private static final String TAG = "cdvRootBeer";
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {

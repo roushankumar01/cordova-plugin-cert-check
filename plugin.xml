@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-plugin-android-rootbeer"
+    id="cordova-plugin-cert-check"
     version="1.0.0">
     <name>RootBeer Library for Cordova</name>
     <description></description>
@@ -11,10 +11,10 @@
     <platform name="android">
       <js-module src="www/plugin.js" name="plugin">
         <runs/>        
-        <clobbers target="cdvRootBeer" />
+        <clobbers target="certCheck" />
       </js-module>
       <config-file target="res/xml/config.xml" parent="/*">
-        <feature name="cdvRootBeer">
+        <feature name="certCheck">
           <param name="android-package" value="com.rb.cdvRootBeer" />
           <param name="onload" value="true" />
         </feature>

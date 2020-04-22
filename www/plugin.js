@@ -10,9 +10,9 @@ try {
 }
 
 
-var PLUGIN_NAME = 'cdvRootBeer';
+var PLUGIN_NAME = 'certCheck';
 
-var cdvRootBeer = {
+var certCheck = {
   isRooted: function (cb, err) {
     exec(cb, err, PLUGIN_NAME, 'isRooted', []);
   },
@@ -57,4 +57,4 @@ var cdvRootBeer = {
   }
 };
 
-module.exports = cdvRootBeer;
+module.exports = certCheck;
