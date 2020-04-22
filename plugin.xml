@@ -15,12 +15,12 @@
       </js-module>
       <config-file target="res/xml/config.xml" parent="/*">
         <feature name="certCheck">
-          <param name="android-package" value="com.rb.cdvRootBeer" />
+          <param name="android-package" value="com.rb.certCheck" />
           <param name="onload" value="true" />
         </feature>
       </config-file>
 
-      <source-file src="src/android/com/rb/cdvRootBeer.java" target-dir="src/com/rb/" />
+      <source-file src="src/android/com/rb/certCheck.java" target-dir="src/com/rb/" />
        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
