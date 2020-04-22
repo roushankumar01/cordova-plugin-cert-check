@@ -1,20 +1,26 @@
-<?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-cert-check" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>cartCheck</name>
-    <description>cartCheck</description>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-plugin-android-rootbeer"
+    version="1.0.0">
+    <name>RootBeer Library for Cordova</name>
+    <description></description>
     <license>MIT</license>
-    <js-module name="cartCheck" src="www/isDebug.js">
-        <clobbers target="cordova.plugins.cartCheck" />
-    </js-module>
-
+    <keywords></keywords>
+    <!-- android -->
     <platform name="android">
-        <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="cartCheck">
-                <param name="android-package" value="me.mattlewis.isdebug.cartCheck" />
-            </feature>
-        </config-file>
-        <config-file parent="/*" target="AndroidManifest.xml" />
+      <js-module src="www/plugin.js" name="plugin">
+        <runs/>        
+        <clobbers target="cdvRootBeer" />
+      </js-module>
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="cdvRootBeer">
+          <param name="android-package" value="com.rb.cdvRootBeer" />
+          <param name="onload" value="true" />
+        </feature>
+      </config-file>
 
-        <source-file src="src/android/IsDebug.java" target-dir="src/me/mattlewis/isdebug/IsDebug" />
+      <source-file src="src/android/com/rb/cdvRootBeer.java" target-dir="src/com/rb/" />
+       <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
