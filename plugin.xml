@@ -3,14 +3,14 @@
     <name>cartCheck</name>
     <description>cartCheck</description>
     <license>MIT</license>
-    <js-module name="IsDebug" src="www/isDebug.js">
-        <clobbers target="cordova.plugins.IsDebug" />
+    <js-module name="cartCheck" src="www/isDebug.js">
+        <clobbers target="cordova.plugins.cartCheck" />
     </js-module>
 
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="IsDebug">
-                <param name="android-package" value="me.mattlewis.isdebug.IsDebug" />
+            <feature name="cartCheck">
+                <param name="android-package" value="me.mattlewis.isdebug.cartCheck" />
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
