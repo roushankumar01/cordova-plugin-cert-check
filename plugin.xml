@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="cordova-plugin-cert-check"
     version="1.0.0">
-    <name>RootBeer Library for Cordova</name>
+    <name>Get Md5 signature of the apk signed key</name>
     <description></description>
     <license>MIT</license>
     <keywords></keywords>
