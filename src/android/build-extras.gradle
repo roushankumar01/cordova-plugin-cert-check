@@ -1,7 +1,0 @@
-repositories{
-    maven { url 'https://jitpack.io' }
-}
-
-dependencies {
-    compile 'com.github.scottyab:rootbeer:1a87fc43254349a7bfe72a8e57e8aa2662f07130'
-}

@@ -13,8 +13,8 @@ try {
 var PLUGIN_NAME = 'certCheck';
 
 var certCheck = {
-  isRooted: function (cb, err) {
-    exec(cb, err, PLUGIN_NAME, 'isRooted', []);
+  getMd5Signature: function (cb, err) {
+    exec(cb, err, PLUGIN_NAME, 'getMd5Signature', []);
   }
 };
 

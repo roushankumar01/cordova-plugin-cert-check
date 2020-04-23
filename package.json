@@ -1,13 +1,12 @@
 {
   "name": "cordova-plugin-cert-check",
   "version": "1.0.0",
-  "description": "A cordova plugin to detect if the device is running in debug mode or not.",
+  "description": "A cordova plugin to get the md5 for the signed in signatures",
   "keywords": [
     "cordova",
     "debug",
     "ecosystem:cordova",
-    "cordova-android",
-    "cordova-ios"
+    "cordova-android"
   ],
   "cordova": {
     "id": "cordova-plugin-cert-check",
