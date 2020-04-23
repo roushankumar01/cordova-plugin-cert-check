@@ -39,7 +39,7 @@ public class certCheck extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
       Context context = this.cordova.getActivity().getApplicationContext();
 
-      String strResult = "";
+      /*String strResult = "";
       PackageInfo packageInfo = null;
       try {
           Log.d("key", context.getPackageName());
@@ -56,30 +56,58 @@ public class certCheck extends CordovaPlugin {
       } catch (NameNotFoundException e) {
           e.printStackTrace();
           callbackContext.error("catch");
+      }*/
+
+      try {
+          PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+          Signature[] signs = packageInfo.signatures;
+          Signature sign = signs[0];
+          String s = getMd5(sign);
+
+
+          JSONObject result = new JSONObject();
+          result.put("status", true);
+          result.put("md5", s);
+          callbackContext.success(result);
+      } catch (Exception e) {
+          e.printStackTrace();
+          JSONObject error = new JSONObject();
+          error.put("status", false);
+          error.put("error", e.getMessage());
+          callbackContext.error(error);
       }
 
-    return true;
+
+      return true;
   }
-
-
-    protected static String doFingerprint(byte[] certificateBytes, String algorithm)
-            throws Exception {
-        MessageDigest md = MessageDigest.getInstance(algorithm);
-        md.update(certificateBytes);
-        byte[] digest = md.digest();
-
-        String toRet = "";
-        for (int i = 0; i < digest.length; i++) {
-            if (i != 0)
-                toRet += ":";
-            int b = digest[i] & 0xff;
-            String hex = Integer.toHexString(b);
-            if (hex.length() == 1)
-                toRet += "0";
-            toRet += hex;
-        }
-        return toRet;
+    private String getMd5 (Signature signature) {
+        return encryptionMD5(signature.toByteArray());
     }
+    public static String encryptionMD5(byte[] byteStr) {
+        MessageDigest messageDigest = null;
+        StringBuffer md5StrBuff = new StringBuffer();
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.reset();
+            messageDigest.update(byteStr);
+            byte[] byteArray = messageDigest.digest();
+            for (int i = 0; i < byteArray.length; i++) {
+                if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
+                    md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));
+                } else {
+                    md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+                }
+                if (i != byteArray.length-1){
+                    md5StrBuff.append(":");
+                }
+                //Log.d("eachvalalue", String.valueOf(md5StrBuff).toUpperCase());
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return md5StrBuff.toString().toUpperCase();
+    }
+
 
   //computed the sha1 hash of the signature
   public static String getSHA1(byte[] sig) {
@@ -107,23 +135,4 @@ public static String bytesToHex(byte[] bytes) {
   }
   return new String(hexChars);
 }
-
-}
-
-class getContext extends Application {
-    private static Context appContext;
-
-    @Override
-    public void onCreate() {
-        Log.d("plugin", "App started");
-        super.onCreate();
-        appContext = getApplicationContext();
-
-        /* If you has other classes that need context object to initialize when application is created,
-         you can use the appContext here to process. */
-    }
-
-    public static Context getAppContext() {
-        return appContext;
-    }
 }
